@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.medicalpractitioner.mapper.CustomMapper">
+    <insert id="insertUserByAccountAndPassword">
+        insert into
+            accounttable(password, id, role, account)
+            values (#{password},#{userId},1,#{account});
+        insert into userinfotable(userId)
+            values (#{userId});
+    </insert>
+
+    <select id="selectPasswd" resultType="com.medicalpractitioner.entity.Custom">
+        SELECT * FROM accounttable WHERE account = #{account}
+    </select>
+    <select id="selectById" resultType="com.medicalpractitioner.entity.Custom">
+        select * from accounttable where id = #{id};
+    </select>
+    <select id="selectAllDoctor" resultType="com.medicalpractitioner.entity.Doctor">
+        select * from doctocinfotable;
+    </select>
+    <select id="selectMaxIdNumber" resultType="java.lang.Integer">
+        select distinct MAX(id) from accounttable
+    </select>
+    <select id="selectRole" resultType="java.lang.Integer">
+        select role from accounttable where account = #{account}
+    </select>
+</mapper>

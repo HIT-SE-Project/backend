@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.medicalpractitioner.mapper.AdminMapper">
+    <insert id="insertDoctorByAccountAndPassword" flushCache="true" statementType="CALLABLE" >
+    <![CDATA[
+        insert into accounttable(password, id, role, account) values (#{password}, #{doctorId}, 2, #{account});
+        insert into doctocinfotable(doctorId) values (#{doctorId});
+        insert into patientnum(doctorId) values (#{doctorId});
+        insert into timeselecttable(doctorId, timeId) select #{doctorId}, timeId from timetable;
+        ]]>
+    </insert>
+    <update id="updateDoctorRight">
+        update doctocinfotable
+        set refuseAppointment = #{refuseAppointment},
+            modifyinfo = #{modifyInfo}
+        where doctorId = #{doctorId};
+    </update>
+    <delete id="deleteDoctorByDoctorId">
+        delete from patientnum where doctorId = #{doctorId};
+        delete from recordtable where doctorId = #{doctorId};
+        delete from timeselecttable where doctorId = #{doctorId};
+        delete from doctocinfotable where doctorId = #{doctorId};
+        delete from accounttable where  id = #{doctorId};
+    </delete>
+</mapper>
