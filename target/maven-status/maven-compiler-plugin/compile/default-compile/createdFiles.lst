@@ -1,0 +1,12 @@
+com\medicalpractitioner\dto\MyCustomDetail.class
+com\medicalpractitioner\mapper\CustomMapper.class
+com\medicalpractitioner\entity\User.class
+com\medicalpractitioner\contorller\UtilContorller.class
+com\medicalpractitioner\entity\Admin.class
+com\medicalpractitioner\entity\Doctor.class
+com\medicalpractitioner\config\CustomSecurityConfig.class
+com\medicalpractitioner\MedicalPractitionerApplication.class
+com\medicalpractitioner\entity\Custom.class
+com\medicalpractitioner\entity\TimeLine.class
+com\medicalpractitioner\service\Impl\MyCustomDetailService.class
+com\medicalpractitioner\vo\ReturnPackage.class

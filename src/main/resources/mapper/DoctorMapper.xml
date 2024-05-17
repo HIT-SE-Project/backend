@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.medicalpractitioner.mapper.DoctorMapper">
+    <update id="updateInfo" parameterType="com.medicalpractitioner.entity.Doctor">
+        update doctocinfotable
+        set name = #{doctor.name},
+            department = #{doctor.department},
+            title = #{doctor.title},
+            profile = #{doctor.profile},
+            image = #{doctor.image}
+        where doctorId = #{paramId};
+    </update>
+    <update id="updateModifyRight">
+        update doctocinfotable
+        set modifyinfo = #{flag}
+        where doctorId = #{doctorId};
+    </update>
+    <update id="updateAppointmentRight">
+        update doctocinfotable
+        set refuseAppointment = #{flag}
+        where doctorId = #{doctorId};
+    </update>
+    <update id="updatePatientNum">
+        update patientnum
+        set patientNum = #{num}
+        where doctorId = #{doctorId};
+    </update>
+    <update id="updateRecordStaus">
+        update recordtable
+        set flag = #{flag}
+        where recordIdx = #{recordIdx};
+    </update>
+    <select id="queryInfo" resultType="com.medicalpractitioner.entity.Doctor">
+        select * from doctocinfotable where doctorId  = #{doctorId};
+    </select>
+    <select id="quaryAppointmentPatientNum" resultType="java.lang.Integer">
+        select patientNum from patientnum where doctorId = #{doctorId};
+    </select>
+    <select id="selectRecordByTimeIdAndDcotorIdAndDate" resultType="com.medicalpractitioner.entity.Record">
+        select * from recordtable where timeId = #{timeId}
+                                    and doctorId = #{doctorId}
+                                    and date = #{date}
+                                    and flag = #{status};
+    </select>
+    <select id="selectAValiableTimeLine" resultType="java.lang.Integer">
+        select timeId from timeselecttable where doctorId = #{doctorId};
+    </select>
+    <select id="queryRecord" resultType="com.medicalpractitioner.entity.Record">
+        select * from recordtable where doctorId = #{doctorId}
+    </select>
+    <insert id="insertRecord">
+        insert into recordtable(doctorId, userId, date, timeId)
+            value(#{doctorId},#{userId},#{date},#{timeId});
+    </insert>
+</mapper>
