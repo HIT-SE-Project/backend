@@ -6,4 +6,5 @@
         set flag = 4
         where #{today} > date and flag = 1;
     </update>
+
 </mapper>
