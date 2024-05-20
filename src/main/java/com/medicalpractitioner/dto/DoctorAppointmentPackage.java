@@ -5,6 +5,6 @@ import lombok.Data;
 @Data
 public class DoctorAppointmentPackage {
     private int doctorId;
-    private String localDate;
+    private String date;
     private int timeId;
 }

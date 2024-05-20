@@ -34,7 +34,7 @@ public class DoctorController {
 
     @PostMapping("/api/doctor/doctorAppointment")
     public ReturnPackage doctorAppointmentStatus(@RequestBody DoctorAppointmentPackage doctorAppointmentPackage){
-        LocalDate parsedDate = TimeProcessor.StrTransIntoLocalDate(doctorAppointmentPackage.getLocalDate());
+        LocalDate parsedDate = TimeProcessor.StrTransIntoLocalDate(doctorAppointmentPackage.getDate());
         if(doctorService.doctorAppointMent(IdentifyID.getCustomId(),
                 doctorAppointmentPackage.getDoctorId(),parsedDate,doctorAppointmentPackage.getTimeId())){
             return ReturnPackage.suc();
