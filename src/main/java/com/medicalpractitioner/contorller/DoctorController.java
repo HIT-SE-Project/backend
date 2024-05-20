@@ -2,6 +2,7 @@ package com.medicalpractitioner.contorller;
 
 import com.medicalpractitioner.Utils.IdentifyID;
 import com.medicalpractitioner.Utils.TimeProcessor;
+import com.medicalpractitioner.dto.DoctorAppointmentPackage;
 import com.medicalpractitioner.entity.Doctor;
 import com.medicalpractitioner.service.CustomService;
 import com.medicalpractitioner.service.DoctorService;
@@ -32,12 +33,10 @@ public class DoctorController {
     }
 
     @PostMapping("/api/doctor/doctorAppointment")
-    public ReturnPackage doctorAppointmentStatus(@RequestParam("doctorId")int doctorId,
-                                                 @RequestParam("date") String localDate,
-                                                 @RequestParam("timeId") int timeId){
-        LocalDate parsedDate = TimeProcessor.StrTransIntoLocalDate(localDate);
+    public ReturnPackage doctorAppointmentStatus(@RequestBody DoctorAppointmentPackage doctorAppointmentPackage){
+        LocalDate parsedDate = TimeProcessor.StrTransIntoLocalDate(doctorAppointmentPackage.getLocalDate());
         if(doctorService.doctorAppointMent(IdentifyID.getCustomId(),
-                doctorId,parsedDate,timeId)){
+                doctorAppointmentPackage.getDoctorId(),parsedDate,doctorAppointmentPackage.getTimeId())){
             return ReturnPackage.suc();
         }else{
             return ReturnPackage.fail();
