@@ -14,6 +14,8 @@ class MedicalPractitionerApplicationTests {
 
     @Test
     public void genEncoderPasswd(){
-        System.out.println(new BCryptPasswordEncoder().encode("userZero"));
+
+        System.out.println(new BCryptPasswordEncoder().encode("doctor1"));
+
     }
 }
