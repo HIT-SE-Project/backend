@@ -3,6 +3,7 @@ package com.medicalpractitioner.contorller;
 import com.medicalpractitioner.Utils.IdentifyID;
 import com.medicalpractitioner.Utils.TimeProcessor;
 import com.medicalpractitioner.dto.DoctorAppointmentPackage;
+import com.medicalpractitioner.dto.RecordHandleInfo;
 import com.medicalpractitioner.entity.Doctor;
 import com.medicalpractitioner.service.CustomService;
 import com.medicalpractitioner.service.DoctorService;
@@ -69,8 +70,8 @@ public class DoctorController {
     }
 
     @PostMapping("/api/doctor/handleRecord")
-    public ReturnPackage dealWithRecord(@RequestParam("recordIdx") int recordIdx,@RequestParam("opration") int opration){
-        if(doctorService.updateRecordStatus(recordIdx,opration)){
+    public ReturnPackage dealWithRecord(@RequestBody RecordHandleInfo recordHandleInfo){
+        if(doctorService.updateRecordStatus(recordHandleInfo.getRecordIdx(),recordHandleInfo.getOpration())){
             return ReturnPackage.suc();
         }else{
             return ReturnPackage.fail();
