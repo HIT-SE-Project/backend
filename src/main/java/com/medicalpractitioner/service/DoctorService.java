@@ -23,4 +23,10 @@ public interface DoctorService {
      List<AppointmentStatus> getAppointmentStatus(int doctorId, LocalDate localDate);
 
     boolean updateRecordStatus(int recordIdx,int opration);
+
+    boolean queryRcdExist(int userId,int doctorId,int timeId,LocalDate date);
+
+    boolean addDoctorAppointmentTimeId(int timeId,int doctorId);
+
+    boolean deleteDoctorAppointmentTimeId(int timeId,int doctorId);
 }

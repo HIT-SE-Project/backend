@@ -11,11 +11,8 @@ import com.medicalpractitioner.service.Impl.CustomServiceImpl;
 import com.medicalpractitioner.vo.ReturnPackage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.time.LocalDate;
 
-import java.time.format.DateTimeFormatter;
-import java.util.List;
 
 
 @RestController
@@ -37,12 +34,19 @@ public class DoctorController {
         return ReturnPackage.suc(doctorService.getAppointmentStatus(doctorId,parsedDate));
     }
 
+    //预约医生
     @PostMapping("/api/doctor/doctorAppointment")
-
-    public ReturnPackage doctorAppointmentStatus(@RequestBody DoctorAppointmentPackage doctorAppointmentPackage){
+    public ReturnPackage doctorAppointment(@RequestBody DoctorAppointmentPackage doctorAppointmentPackage){
         LocalDate parsedDate = TimeProcessor.StrTransIntoLocalDate(doctorAppointmentPackage.getDate());
-        if(doctorService.doctorAppointMent(IdentifyID.getCustomId(),
-                doctorAppointmentPackage.getDoctorId(),parsedDate,doctorAppointmentPackage.getTimeId())){
+        int userId = IdentifyID.getCustomId();
+        int doctorId = doctorAppointmentPackage.getDoctorId();
+        int timeId = doctorAppointmentPackage.getTimeId();
+        if(doctorService.queryRcdExist(userId,doctorId,timeId,parsedDate)){
+            return ReturnPackage.pack(401,"重复预约",null);
+        }
+
+        if(doctorService.doctorAppointMent(userId,
+                doctorId,parsedDate,timeId)){
 
             return ReturnPackage.suc();
         }else{
@@ -85,5 +89,22 @@ public class DoctorController {
        }else{
            return ReturnPackage.fail();
        }
+    }
+    @GetMapping("/api/doctor/addDoctorTimeLine")
+    public ReturnPackage addDoctorTimeLine(@RequestParam("timeId") int timeId){
+        int doctorId = IdentifyID.getCustomId();
+        if(doctorService.addDoctorAppointmentTimeId(timeId,doctorId)){
+            return ReturnPackage.suc();
+        }
+        return ReturnPackage.fail();
+    }
+
+    @GetMapping("/api/doctor/deleteDoctorTimeLine")
+    public ReturnPackage deleteDoctorTimeLine(@RequestParam("timeId")int timeId){
+        int doctorId = IdentifyID.getCustomId();
+        if(doctorService.deleteDoctorAppointmentTimeId(timeId,doctorId)){
+            return ReturnPackage.suc();
+        }
+        return ReturnPackage.fail();
     }
 }

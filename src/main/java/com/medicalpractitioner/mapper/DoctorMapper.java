@@ -26,4 +26,7 @@ public interface DoctorMapper {
     List<Record> queryRecord(@Param("doctorId") int doctorId);
     boolean updatePatientNum(@Param("num")int num,@Param("doctorId")int doctorId);
     boolean updateRecordStaus(@Param("recordIdx")int recordIdx,@Param("flag") int flag);
+    List<Integer> findDoctorTimeLine(@Param("timeId") int timeId,@Param("doctorId") int doctorId);
+    boolean addDoctorTimeLine(@Param("timeId") int timeId,@Param("doctorId") int doctorId);
+    boolean deleteDoctorTimeLine(@Param("timeId") int timeId,@Param("doctorId") int doctorId);
 }

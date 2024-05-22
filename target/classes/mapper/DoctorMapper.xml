@@ -30,6 +30,9 @@
         set flag = #{flag}
         where recordIdx = #{recordIdx};
     </update>
+    <delete id="deleteDoctorTimeLine">
+        delete from timeselecttable where timeId = #{timeId} and doctorId = #{doctorId};
+    </delete>
     <select id="queryInfo" resultType="com.medicalpractitioner.entity.Doctor">
         select * from doctocinfotable where doctorId  = #{doctorId};
     </select>
@@ -48,8 +51,16 @@
     <select id="queryRecord" resultType="com.medicalpractitioner.entity.Record">
         select * from recordtable where doctorId = #{doctorId}
     </select>
+    <select id="findDoctorTimeLine" resultType="java.lang.Integer">
+        select `index` from timeselecttable
+        where timeId = #{timeId} and doctorId = #{doctorId};
+    </select>
     <insert id="insertRecord">
         insert into recordtable(doctorId, userId, date, timeId)
             value(#{doctorId},#{userId},#{date},#{timeId});
+    </insert>
+    <insert id="addDoctorTimeLine">
+        insert into timeselecttable(doctorId, timeId)
+        VALUES(#{doctorId},#{timeId});
     </insert>
 </mapper>

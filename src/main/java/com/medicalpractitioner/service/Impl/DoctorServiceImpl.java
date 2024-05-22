@@ -4,8 +4,10 @@ import com.medicalpractitioner.dto.Const;
 import com.medicalpractitioner.entity.Doctor;
 import com.medicalpractitioner.entity.Record;
 import com.medicalpractitioner.mapper.DoctorMapper;
+import com.medicalpractitioner.mapper.RecordMapper;
 import com.medicalpractitioner.service.DoctorService;
 import com.medicalpractitioner.vo.AppointmentStatus;
+import com.medicalpractitioner.vo.ReturnPackage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +19,8 @@ public class DoctorServiceImpl implements DoctorService {
 
     @Autowired
     private DoctorMapper doctorMapper;
+    @Autowired
+    private RecordMapper recordMapper;
 
     //Done
     @Override
@@ -111,5 +115,41 @@ public class DoctorServiceImpl implements DoctorService {
             return false;
         }
         return true;
+    }
+
+    //确认记录信息是否存在
+    @Override
+    public boolean queryRcdExist(int userId,int doctorId,int timeId,LocalDate date){
+        List<Integer> rcdIdList = recordMapper.queryRcdExist(doctorId,userId,date,timeId);
+        if(rcdIdList.size() > 0 ){
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    //添加doctor的可预约时间段
+    @Override
+    public boolean addDoctorAppointmentTimeId(int timeId,int doctorId){
+        if(doctorMapper.findDoctorTimeLine(timeId,doctorId).size() > 0){
+            return false;
+        }else{
+            try{
+                boolean res = doctorMapper.addDoctorTimeLine(timeId,doctorId);
+                return res;
+            }catch (Exception e){
+                return false;
+            }
+        }
+    }
+
+    @Override
+    public boolean deleteDoctorAppointmentTimeId(int timeId,int doctorId){
+        try{
+            boolean res = doctorMapper.deleteDoctorTimeLine(timeId,doctorId);
+            return res;
+        }catch (Exception e){
+            return false;
+        }
     }
 }
