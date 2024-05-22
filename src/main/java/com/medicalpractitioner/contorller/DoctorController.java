@@ -57,7 +57,7 @@ public class DoctorController {
 
     @PostMapping("/api/doctor/updateDoctorInfo")
     public ReturnPackage updateDoctorInfo(@RequestBody Doctor doctor){
-        if(doctorService.updateInfo(doctor,IdentifyID.getCustomId())){
+        if(doctorService.updateInfo(doctor,doctor.getDoctorId())){
             return ReturnPackage.suc();
         }else {
             return ReturnPackage.fail();

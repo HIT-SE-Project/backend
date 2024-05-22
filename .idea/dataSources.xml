@@ -1,22 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="hospital@localhost" uuid="73b44b07-de74-4fbb-828a-2c235da81828">
-      <driver-ref>mysql.8</driver-ref>
-      <synchronize>true</synchronize>
-      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://localhost:3306/hospital</jdbc-url>
-      <working-dir>$ProjectFileDir$</working-dir>
-    </data-source>
-<<<<<<< HEAD
-=======
-    <data-source source="LOCAL" name="@server" uuid="d7d8086b-ccb5-4a96-b7a0-85fe0f715d32">
+    <data-source source="LOCAL" name="@server" uuid="3ed3bb1d-f3f7-4c70-bbbd-f5b923a03249">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
       <jdbc-url>jdbc:mysql://114.116.250.107:3306/hospital</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
->>>>>>> master
   </component>
 </project>

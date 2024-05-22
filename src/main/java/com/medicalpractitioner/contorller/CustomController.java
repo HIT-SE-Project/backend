@@ -1,5 +1,6 @@
 package com.medicalpractitioner.contorller;
 
+import com.medicalpractitioner.dto.LoginInfo;
 import com.medicalpractitioner.entity.Custom;
 import com.medicalpractitioner.service.Impl.CustomServiceImpl;
 import com.medicalpractitioner.vo.ReturnPackage;
@@ -14,8 +15,8 @@ public class CustomController {
     @Autowired
     public CustomServiceImpl customService;
     @PostMapping("/api/register")
-    public ReturnPackage userRegister(@RequestParam("account") String account, @RequestParam("password") String password){
-        if(customService.userRegister(account,password)){
+    public ReturnPackage userRegister(@RequestBody LoginInfo loginInfo){
+        if(customService.userRegister(loginInfo.getAccount(),loginInfo.getPassword())){
             return  ReturnPackage.suc();
         }else{
             return ReturnPackage.fail();
